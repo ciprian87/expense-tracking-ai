@@ -1,6 +1,7 @@
 "use client";
 
 import { useExpenses } from "@/lib/useExpenses";
+import { exportToCSV } from "@/lib/utils";
 import AppShell from "@/components/AppShell";
 import SummaryCards from "@/components/SummaryCards";
 import Charts from "@/components/Charts";
@@ -22,9 +23,19 @@ export default function DashboardPage() {
   return (
     <AppShell>
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-sm text-gray-500 mt-1">Your spending overview at a glance</p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+          <p className="text-sm text-gray-500 mt-1">Your spending overview at a glance</p>
+        </div>
+        {expenses.length > 0 && (
+          <button
+            onClick={() => exportToCSV(expenses)}
+            className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+          >
+            Export Data
+          </button>
+        )}
       </div>
 
       {/* Summary Cards */}
